@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Leaflet debug page</title>
+  <title>Land & Water Conservation Fund &mdash; 2014-2017 Map</title>
 
   <!-- load jquery -->
   <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.min.js"></script>
@@ -38,17 +38,24 @@
   .addLayer(tiles);
 
   // Add layer for markercluster
-  var markers = L.markerClusterGroup();
+  var markers = L.markerClusterGroup({
+    maxClusterRadius: 30
+  });
 
   //for the popupAnchor
   function onEachFeature(feature, layer) {
-    layer.bindPopup('<p>' + feature.properties.state + '<br />'
+    baseText = '<p>' + feature.properties.state + '<br />'
     +'<span style="font-size:14px"><b>' + feature.properties.unit + '</b></span><br />'
     + feature.properties.program + ', ' + feature.properties.year + '</p><p>'
     + '<b>Status: </b>' + feature.properties.status + '<br/>'
     + '<b>Acres: </b>' + feature.properties.acres + '<br />'
-    + '<b>Budget: </b>' + feature.properties.budget + '</p>'
-  );
+    + '<b>Budget: </b>' + feature.properties.budget + '</p>';
+    if (feature.properties.notes != "") {
+      popupText = baseText + '<p style="font-size:9px">' + feature.properties.notes + '</p>'
+    } else {
+      popupText = baseText
+    }
+    layer.bindPopup(popupText);
 }
 
 // Use jQuery to load data from GeoJSON file
