@@ -47,28 +47,29 @@
     maxClusterRadius: 30,
     singleMarkerMode: false
   });
-
+  
   function createCustomIcon (feature, latlng) {
     switch (feature.properties.status) {
       case 'Completed':
-        color = 'darkgreen';
-        break;
+      color = 'green';
+      break;
       case 'In Process':
-        color = 'cadetblue';
-        break;
+      color = 'lightblue';
+      break;
       case 'Proposed':
-        color = 'darkpurple';
-        break;
+      color = 'beige';
+      break;
       case 'Unknown':
-        color = 'lightgray';
-        break
+      color = 'lightgray';
+      break
       default:
-        color = 'lightgray';
+      color = 'lightgray';
     }
     let myIcon = L.AwesomeMarkers.icon({
       icon: 'none',
-      markerColor: color
-      })
+      markerColor: color,
+      className: 'awesome-marker awesome-marker-square'
+    })
     return L.marker(latlng, { icon: myIcon })
   }
 
