@@ -9,6 +9,7 @@ body {
 
 #map {
 	width: 100%;
+    position: absolute;
 	border: none;
     padding: 0;
     margin: 0;
