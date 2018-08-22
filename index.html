@@ -39,7 +39,7 @@
     <div class="sidebar-tabs">
       <ul role="tablist">
         <li id="hometab" class="active"><a href="#home" role="tab"><i class="fas fa-map-marked"></i></a></li>
-        <li><a href="#legend" role="tab"><i class="fas fa-atlas"></i></a></li>
+        <li><a href="#legend" id="legendtab" role="tab"><i class="fas fa-atlas"></i></a></li>
         <li><a href="http://westernpriorities.org/" role="tab" target="_blank"><i class="fa fa-home"></i></a></li>
       </ul>
     </div>
@@ -74,7 +74,11 @@
             of disappearing forever.
           </p>
 
-          <p>On this map the <a href="http://westernpriorities.org/" target="_blank">Center for Western
+          <button role="button" class="btn btn-secondary" onClick="L.control.sidebar('sidebar').open('legend')">
+            View Legend
+          </button>
+
+          <p style="margin-top: 10px;">On this map the <a href="http://westernpriorities.org/" target="_blank">Center for Western
             Priorities</a> quantifies
             the Land and Water Conservation Fund’s record of
             success by compiling an on-the-ground snapshot of U.S.
@@ -158,7 +162,6 @@
                 </tr>
               </table>
             </a>
-
 
           </div>
 
