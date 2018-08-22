@@ -24,6 +24,9 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/leaflet-sidebar.min.css" />
 
+  <!-- fullscreen control -->
+  <link rel="stylesheet" href="css/Control.FullScreen.css" />
+
   <!-- awesome markers -->
   <link rel="stylesheet" href="css/leaflet.awesome-markers.css" />
 
@@ -51,109 +54,124 @@
         </h1>
         <h4>The Land &amp; Water Conservation Fund</h4>
         <h5>2014&ndash;2017 projects
-      </div>
+        </div>
 
-      <div class="sidebar-pane" id="legend">
-        <h1 class="sidebar-header">
-          Legend
-          <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
-        </h1>
-      </div>
+        <div class="sidebar-pane" id="legend">
+          <h1 class="sidebar-header">
+            Legend
+            <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+          </h1>
+        </div>
 
+      </div>
     </div>
-  </div>
 
-  <div id="map" class="sidebar-map"></div>
+    <div id="map" class="sidebar-map"></div>
 
-  <!-- load jquery -->
-  <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.min.js"></script>
+    <!-- load jquery -->
+    <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.min.js"></script>
 
-  <!-- bootstrap js -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- bootstrap js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-  <!-- all the leaflet and plugins js -->
-  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-  crossorigin=""></script>
-  <script src="js/leaflet.awesome-markers.min.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
-  <script src="js/leaflet-sidebar.min.js"></script>
+    <!-- all the leaflet and plugins js -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+    <script src="js/leaflet.awesome-markers.min.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+    <script src="js/Control.FullScreen.js"></script>
+    <script src="js/leaflet-sidebar.min.js"></script>
 
-<!-- actually build the map -->
-  <script type="text/javascript">
+    <!-- actually build the map -->
+    <script type="text/javascript">
 
-  var tiles = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'LWCF data by Center for Western Priorities, Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 10,
-    id: 'mapbox.outdoors',
-    accessToken: 'pk.eyJ1IjoiY2VudGVyLWZvci13ZXN0ZXJuLXByaW9yaXRpZXMiLCJhIjoicDdmTEllZyJ9.Ox4hqPZ7mPtvidL69modKg'
-  })
-
-  var map = L.map('map')
-  .setView([37, -99], 5)
-  .addLayer(tiles);
-
-  // Add layer for markercluster
-  var markers = L.markerClusterGroup({
-    maxClusterRadius: 30,
-    singleMarkerMode: false
-  });
-
-  function createCustomIcon (feature, latlng) {
-    switch (feature.properties.status) {
-      case 'Completed':
-      color = 'green';
-      break;
-      case 'In Process':
-      color = 'lightblue';
-      break;
-      case 'Proposed':
-      color = 'beige';
-      break;
-      case 'Unknown':
-      color = 'lightgray';
-      break
-      default:
-      color = 'lightgray';
-    }
-    let myIcon = L.AwesomeMarkers.icon({
-      icon: 'none',
-      markerColor: color
+    var tiles = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      attribution: 'LWCF data by Center for Western Priorities, Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 9,
+      id: 'mapbox.outdoors',
+      accessToken: 'pk.eyJ1IjoiY2VudGVyLWZvci13ZXN0ZXJuLXByaW9yaXRpZXMiLCJhIjoicDdmTEllZyJ9.Ox4hqPZ7mPtvidL69modKg'
     })
-    return L.marker(latlng, { icon: myIcon })
-  }
 
-  //for the popupAnchor
-  function onEachFeature(feature, layer) {
-    baseText = '<p>' + feature.properties.state + '<br />'
-    +'<span style="font-size:14px"><b>' + feature.properties.unit + '</b></span><br />'
-    + feature.properties.program + ', ' + feature.properties.year + '</p><p>'
-    + '<b>Status: </b>' + feature.properties.status + '<br/>'
-    + '<b>Acres: </b>' + feature.properties.acres + '<br />'
-    + '<b>Budget: </b>' + feature.properties.budget + '</p>';
-    if (feature.properties.notes != "") {
-      popupText = baseText + '<p style="font-size:9px">' + feature.properties.notes + '</p>'
-    } else {
-      popupText = baseText
-    }
-    layer.bindPopup(popupText);
-  }
+    var map = L.map('map')
+    .setView([37, -99], 5)
+    .addLayer(tiles);
 
-  // Use jQuery to load data from GeoJSON file and add the layer
-  $.getJSON('data/data.geojson', function(data) {
-    var geoJsonLayer = L.geoJson(data, {
-      onEachFeature: onEachFeature,
-      pointToLayer: createCustomIcon
+    // Add layer for markercluster
+    var markers = L.markerClusterGroup({
+      maxClusterRadius: 30,
+      singleMarkerMode: false
     });
-    // Add geoJsonLayer to markercluster group
-    markers.addLayer(geoJsonLayer);
-    // Add the markercluster group to the map
-    map.addLayer(markers);
-  });
 
-  // Load the sidebar
-  var sidebar = L.control.sidebar('sidebar').addTo(map);
+    function createCustomIcon (feature, latlng) {
+      switch (feature.properties.status) {
+        case 'Completed':
+        color = 'green';
+        break;
+        case 'In Process':
+        color = 'lightblue';
+        break;
+        case 'Proposed':
+        color = 'beige';
+        break;
+        case 'Unknown':
+        color = 'lightgray';
+        break
+        default:
+        color = 'lightgray';
+      }
+      let myIcon = L.AwesomeMarkers.icon({
+        icon: 'none',
+        markerColor: color
+      })
+      return L.marker(latlng, { icon: myIcon })
+    }
 
-</script>
-</body>
-</html>
+    //for the popupAnchor
+    function onEachFeature(feature, layer) {
+      baseText = '<p>' + feature.properties.state + '<br />'
+      +'<span style="font-size:14px"><b>' + feature.properties.unit + '</b></span><br />'
+      + feature.properties.program + ', ' + feature.properties.year + '</p><p>'
+      + '<b>Status: </b>' + feature.properties.status + '<br/>'
+      + '<b>Acres: </b>' + feature.properties.acres + '<br />'
+      + '<b>Budget: </b>' + feature.properties.budget + '</p>';
+      if (feature.properties.notes != "") {
+        popupText = baseText + '<p style="font-size:9px">' + feature.properties.notes + '</p>'
+      } else {
+        popupText = baseText
+      }
+      layer.bindPopup(popupText);
+    }
+
+    // Use jQuery to load data from GeoJSON file and add the layer
+    $.getJSON('data/data.geojson', function(data) {
+      var geoJsonLayer = L.geoJson(data, {
+        onEachFeature: onEachFeature,
+        pointToLayer: createCustomIcon
+      });
+      // Add geoJsonLayer to markercluster group
+      markers.addLayer(geoJsonLayer);
+      // Add the markercluster group to the map
+      map.addLayer(markers);
+    });
+
+    // Load the sidebar
+    var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+    L.control.fullscreen({
+      position: 'bottomright', // change the position of the button can be topleft, topright, bottomright or bottomleft, defaut topleft
+      title: 'Fullscreen', // change the title of the button, default Full Screen
+      titleCancel: 'Exit fullscreen', // change the title of the button when fullscreen is on, default Exit Full Screen
+      content: '<i class="fas fa-expand"></i>', // change the content of the button, can be HTML, default null
+      forceSeparateButton: true, // force seperate button to detach from zoom buttons, default false
+      forcePseudoFullscreen: false, // force use of pseudo full screen even if full screen API is available, default false
+      fullscreenElement: document.getElementById('map').parentNode // Dom element to render in full screen, false by default, fallback to map._container
+    }).addTo(map);
+
+    map.on('enterFullscreen', function(){
+      map.invalidateSize(true);
+    });
+
+    </script>
+  </body>
+  </html>
