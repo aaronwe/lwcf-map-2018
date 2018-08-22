@@ -38,7 +38,7 @@
     <!-- Nav tabs -->
     <div class="sidebar-tabs">
       <ul role="tablist">
-        <li class="active"><a href="#home" role="tab"><i class="fas fa-map-marked"></i></a></li>
+        <li id="hometab" class="active"><a href="#home" role="tab"><i class="fas fa-map-marked"></i></a></li>
         <li><a href="#legend" role="tab"><i class="fas fa-atlas"></i></a></li>
         <li><a href="http://westernpriorities.org/" role="tab" target="_blank"><i class="fa fa-home"></i></a></li>
       </ul>
@@ -82,7 +82,7 @@
             proposed during a four-year period, from 2014 to 2017.
             </p>
 
-            <a href="" role="button" class="btn btn-primary">
+            <a href="http://westernpriorities.org/wp-content/uploads/2018/08/LWCFReport_Aug_2018_final.pdf" role="button" class="btn btn-primary">
               <table>
                 <tr>
                   <td rowspan=2 style="padding: 0px 8px;">
@@ -103,10 +103,10 @@
             </h1>
 
             <h4 style="margin-top: 10px;">Complete</h4>
-            <p><img src="images/marker-green.png" height="40" style="float: left; margin-right: 5px;"/> <b>COMPLETE</b>
+            <p> <img src="images/marker-green.png" width="30" height="40" style="float: left; margin-right: 5px;"/> <b>COMPLETE</b>
               A project was considered “complete” when an agency spent LWCF funds to protect lands.
             </p>
-            <p>
+            <p style="clear: both;">
               According to CWP's analysis, <b>293 U.S. public land and Forest
                 Legacy LWCF projects in 42 states</b> were successfully
                 completed between 2014 and 2017, conserving
@@ -114,10 +114,10 @@
                 and public lands from the threat of development.
             </p>
             <h4>Proposed</h4>
-            <p><img src="images/marker-blue.png" height="40" style="float: left; margin-right: 5px;"/> <b>IN PROCESS</b>
+            <p><img src="images/marker-blue.png" width="30" height="40" style="float: left; margin-right: 5px;"/> <b>IN PROCESS</b>
               A project was considered “in process” when ongoing negotiations between an agency and a landowner were confirmed.
             </p>
-            <p><img src="images/marker-beige.png" height="40" style="float: left; margin-right: 5px;"/> <b>NOT COMPLETE</b>
+            <p><img src="images/marker-beige.png" width="30" height="40" style="float: left; margin-right: 5px;"/> <b>NOT COMPLETE</b>
               A project was considered “not complete” when an agency identified the project as a priority, and one of the following occurred:
             </p>
             <ul>
@@ -139,14 +139,14 @@
               not reauthorized and fully funded. Of the projects identified, <b>a minimum
               of 318,000 acres are on the line if LWCF expires this September</b>.
             </p>
-            <p><img src="images/marker-gray.png" height="40" style="float: left; margin-right: 5px;"/> <b>DATA PENDING</b>
+            <p><img src="images/marker-gray.png" width="30" height="40" style="float: left; margin-right: 5px;"/> <b>DATA PENDING</b>
               A project was considered “data pending” when an agency failed to respond to a request for information as of August 2018.
             </p>
-            <p style="margin-top: 10px; overflow:auto;"><img src="images/marker-multiple.png" width="40" height="40" style="float: left; margin-right: 5px;"/>
+            <p style="margin-top: 10px; overflow:auto;"><img src="images/marker-multiple.png" width="30" height="30" style="float: left; margin-right: 5px;"/>
               <b>MULTIPLE PROJECTS</b> Click to zoom/expand.
             </p>
 
-            <a href="" role="button" class="btn btn-primary" style="clear: both;">
+            <a href="http://westernpriorities.org/wp-content/uploads/2018/08/LWCFReport_Aug_2018_final.pdf" role="button" class="btn btn-primary" style="clear: both;">
               <table>
                 <tr>
                   <td rowspan=2 style="padding: 0px 8px;">
@@ -260,6 +260,13 @@
         // Add the markercluster group to the map
         map.addLayer(markers);
       });
+
+      //if we're on a small screen, hide the sidebar
+      if (window.innerWidth < 768) {
+        $("#sidebar").addClass("collapsed");
+        $("#home").removeClass("active");
+        $("#hometab").removeClass("active");
+      }
 
       // Load the sidebar
       var sidebar = L.control.sidebar('sidebar').addTo(map);
