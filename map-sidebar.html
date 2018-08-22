@@ -87,8 +87,17 @@
               and public lands from the threat of development.
             </p>
 
-            <a href=""><button type="button" class="btn btn-primary"><i class="fas fa-file-pdf fa-2x"></i>
-              Download the<br />Full report (PDF)</button></a>
+            <a href=""><button type="button" class="btn btn-primary">
+              <table>
+                <tr>
+                  <td rowspan=2 style="padding: 0px 8px;">
+                    <i class="fas fa-file-pdf fa-3x"></i>
+                  </td><td align=left>Download the</td>
+                </tr>
+                <tr><td align=left>
+                  Full report (PDF)</button></a></td>
+                </tr>
+              </table>
             </div>
 
             <div class="sidebar-pane" id="legend">
@@ -201,18 +210,18 @@
         var sidebar = L.control.sidebar('sidebar').addTo(map);
 
         L.control.fullscreen({
-          position: 'bottomright', // change the position of the button can be topleft, topright, bottomright or bottomleft, defaut topleft
-          title: 'Fullscreen', // change the title of the button, default Full Screen
-          titleCancel: 'Exit fullscreen', // change the title of the button when fullscreen is on, default Exit Full Screen
-          content: '<i class="fas fa-expand"></i>', // change the content of the button, can be HTML, default null
+          position: 'bottomright',
+          title: 'Fullscreen',
+          titleCancel: 'Exit fullscreen',
+          content: '<i class="fas fa-expand fa-lg"></i>',
           forceSeparateButton: true, // force seperate button to detach from zoom buttons, default false
           forcePseudoFullscreen: false, // force use of pseudo full screen even if full screen API is available, default false
-          fullscreenElement: document.getElementById('map').parentNode // Dom element to render in full screen, false by default, fallback to map._container
+          fullscreenElement: document.body // document.getElementById('map').parentNode // Dom element to render in full screen, false by default, fallback to map._container
         }).addTo(map);
 
         map.on('enterFullscreen', function(){
           $('#map').offset({ top: 0, left: 0});
-          map.invalidateSize(true);
+          // map.invalidateSize(true);
         });
 
         </script>
