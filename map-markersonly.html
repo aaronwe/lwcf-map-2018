@@ -103,7 +103,8 @@
     // Add layer for markercluster
     var markers = L.markerClusterGroup({
       maxClusterRadius: 30,
-      singleMarkerMode: false
+      singleMarkerMode: false,
+      disableClusteringAtZoom: 3
     });
 
     function createCustomIcon (feature, latlng) {
@@ -111,13 +112,13 @@
         case 'Completed':
         color = 'green';
         break;
-        case 'In Process':
+        case 'Proposed, In Process':
         color = 'lightblue';
         break;
-        case 'Proposed':
+        case 'Proposed, Not Complete':
         color = 'beige';
         break;
-        case 'Unknown':
+        case 'Proposed, Data Pending':
         color = 'lightgray';
         break
         default:
